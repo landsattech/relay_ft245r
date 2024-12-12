@@ -34,10 +34,13 @@ print('Using device with serial number ' + str(dev.serial_number))
 # Connect and set relay state
 rb.connect(dev)
 
+#NOTE : doubled commands are not a mistake -> it's a quirk with the relay driver, required to work idempotently!
 if relay_state == 'on':
+    rb.switchon(relay_number)
     rb.switchon(relay_number)
     print(f"Relay {relay_number} switched ON.")
 else:
+    rb.switchoff(relay_number)
     rb.switchoff(relay_number)
     print(f"Relay {relay_number} switched OFF.")
 
